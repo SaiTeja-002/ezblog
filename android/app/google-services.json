@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "771916773129",
+    "project_id": "ezblog-d51ac",
+    "storage_bucket": "ezblog-d51ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771916773129:android:1a7663175e68428b8d05d8",
+        "android_client_info": {
+          "package_name": "com.example.ezblog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771916773129-bdi5fcv65c8olukulqdo5e6rpnci53tf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ezblog",
+            "certificate_hash": "e0b561702e831228e447e17d1872909c067a9df3"
+          }
+        },
+        {
+          "client_id": "771916773129-a4m5kv6mnv0ag1ukqgre6rn3eemlpqkp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzbuwinBepytrgRuUFyIrjjDwrgmxQ9k4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771916773129-a4m5kv6mnv0ag1ukqgre6rn3eemlpqkp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
