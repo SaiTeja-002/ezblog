@@ -66,9 +66,7 @@ class _BlogCardState extends State<BlogCard> {
                     children: [
                       CircleAvatar(
                         radius: 16,
-                        backgroundImage: NetworkImage(
-                            // "https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg"
-                            widget.snap["profimg"]),
+                        backgroundImage: NetworkImage(widget.snap["profimg"]),
                       ),
 
                       // r1 - username
