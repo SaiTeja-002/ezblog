@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'dart:typed_data';
 // import 'package:flutter_gram/models/user_model.dart' as UserModel;
 import 'package:ezblog/models/user_model.dart' as UserModel;
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -89,4 +90,54 @@ class AuthMethods {
   Future<void> signOut() async {
     await _auth.signOut();
   } // SignOut
+
+  // Google Signin
+  Future<String> GoogleSignin() async {
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
+    String ret = "Error at the beginning itself!";
+
+    try {
+      await GoogleSignIn().signOut();
+      final GoogleSignInAccount? googleUser =
+          await GoogleSignIn(forceCodeForRefreshToken: true).signIn();
+
+      if (googleUser != null) {
+        print('Signed in: ${googleUser.displayName}');
+        ret = "signin success!";
+
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        // String photourl = await StorageMethods()
+        //     .uploadImageToStorage("ProfilePics", user., false);
+
+        UserCredential cred = await _auth.signInWithCredential(credential);
+        User? user = cred.user;
+
+        await _firestore.collection("users").doc(cred.user!.uid).set({
+          'email': user!.email,
+          'uid': user.uid,
+          'photourl': user.photoURL,
+          'userName': user.displayName,
+          'type': "google",
+        });
+
+        ret = "success";
+      } else {
+        // Handle sign in failure
+        print('Sign in failed');
+        ret = "some error occurred";
+      }
+    } catch (error) {
+      // Handle sign in error
+      print('Error signing in: $error');
+      ret = error.toString();
+    } // Google signin
+
+    return ret;
+  }
 }

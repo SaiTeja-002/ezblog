@@ -45,6 +45,32 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
+  void loginWithGoogle() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      // get feedback from the authmethods' signup function
+      String retMessage = await AuthMethods().GoogleSignin();
+
+      if (retMessage != "success") {
+        showSnackBar(retMessage, context);
+      } else {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => BottomNavigation()),
+        );
+        showSnackBar("New Account Created Succesfully!", context);
+      }
+    } catch (e) {
+      showSnackBar(e.toString(), context);
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
   void NavigateToSignUp() {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => SignUpScreen()));
@@ -106,21 +132,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 // TODO: Change it to password type
 
                 // forgot password?
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 10.0),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.end,
+                //     children: [
+                //       Text(
+                //         'Forgot Password?',
+                //         style: TextStyle(
+                //           color: Colors.grey[600],
+                //           fontSize: 12,
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
 
                 // Login Button
                 const SizedBox(height: 30),
@@ -181,18 +207,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
 
-                // google + facebook sign in buttons
+                // google + facebook + GitHub sign in buttons
                 const SizedBox(height: 32),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // google button
-                    SquareTile(imagePath: 'assets/images/google.png'),
+                    GestureDetector(
+                      onTap: loginWithGoogle,
+                      child: const SquareTile(
+                          imagePath: 'assets/images/google.png'),
+                    ),
 
-                    SizedBox(width: 25),
+                    const SizedBox(width: 25),
 
                     // facebook button
                     SquareTile(imagePath: 'assets/images/facebook.png'),
+
+                    SizedBox(width: 25),
+
+                    // GitHub button
+                    SquareTile(imagePath: 'assets/images/github_2.png'),
                   ],
                 ),
 

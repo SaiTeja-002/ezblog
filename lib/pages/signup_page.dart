@@ -219,7 +219,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 // Username availability display
                 // check ? buildUsernameAvailability() : Container(),
-                buildUsernameAvailability(),
+                // buildUsernameAvailability(),
 
                 // Password Input
                 const SizedBox(height: 20),
@@ -288,7 +288,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
 
-                // google + facebook sign in buttons
+                // google + facebook + GitHub sign in buttons
                 const SizedBox(height: 32),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -300,6 +300,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                     // facebook button
                     SquareTile(imagePath: 'assets/images/facebook.png'),
+
+                    SizedBox(width: 25),
+
+                    // GitHub button
+                    SquareTile(imagePath: 'assets/images/github_2.png'),
                   ],
                 ),
 
