@@ -86,13 +86,6 @@ class _ProfilePageState extends State<ProfilePage> {
           : ListView(
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
               children: [
-                // User Profile Picture
-                // CircleAvatar(
-                //   backgroundColor: Colors.black,
-                //   backgroundImage: NetworkImage(userData["photourl"]),
-                //   radius: 70,
-                // ),
-
                 Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 4)
@@ -108,13 +101,34 @@ class _ProfilePageState extends State<ProfilePage> {
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 30),
                 Text(
                   userData["userName"],
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 25,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+
+                // email
+                const SizedBox(height: 20),
+                Text(
+                  userData["email"],
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 15,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+
+                // Provider
+                const SizedBox(height: 20),
+                Text(
+                  "Provider - ${userData["type"]}",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 15,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -135,14 +149,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     SizedBox(width: 4),
                   ],
                 ),
-
                 Divider(
                   thickness: 2,
                   color: Colors.grey[400],
                   indent: 10,
                   endIndent: MediaQuery.of(context).size.width * 0.5,
                 ),
-
                 StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection("blogs")
