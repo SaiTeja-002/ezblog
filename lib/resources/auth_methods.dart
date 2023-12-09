@@ -157,7 +157,8 @@ class AuthMethods {
         final AccessToken accessToken = result.accessToken!;
 
         final graphResponse = await http.get(
-          Uri.parse('https://graph.facebook.com/v14.0/me?fields=id,name,email'),
+          Uri.parse(
+              'https://graph.facebook.com/v14.0/me?fields=id,name,email,picture'),
           headers: {'Authorization': 'Bearer ${accessToken.token}'},
         );
 
@@ -165,6 +166,7 @@ class AuthMethods {
 
         String facebookName = userData['name'] ?? '';
         String facebookEmail = userData['email'] ?? '';
+        String facebookPictureUrl = userData['picture']['data']['url'] ?? '';
 
         final AuthCredential creds =
             FacebookAuthProvider.credential(result.accessToken!.token);
@@ -185,7 +187,9 @@ class AuthMethods {
             'email': facebookEmail,
             'type': "facebook",
             'uid': auth.user?.uid,
-            'photourl': "https://i.stack.imgur.com/l60Hf.png"
+            // 'photourl': facebookPictureUrl,
+            'photourl':
+                "https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png"
           });
         }
 

@@ -52,6 +52,8 @@ class _ProfilePageState extends State<ProfilePage> {
         userData = userSnap.data()!;
         isLoading = false;
       });
+
+      print(userData);
     } catch (err) {
       showSnackBar(err.toString(), context);
       setState(() {

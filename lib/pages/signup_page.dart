@@ -2,6 +2,7 @@
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ezblog/pages/bottom_navigation.dart';
 import 'package:ezblog/pages/login_page.dart';
 import 'package:ezblog/resources/auth_methods.dart';
 import 'package:ezblog/utils/utils.dart';
@@ -43,6 +44,58 @@ class _SignUpScreenState extends State<SignUpScreen> {
     });
   }
 
+  void loginWithFacebook() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      // get feedback from the authmethods' signup function
+      String retMessage = await AuthMethods().FacebookSignin();
+
+      if (retMessage != "success") {
+        showSnackBar(retMessage, context);
+      } else {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => BottomNavigation()),
+        );
+        showSnackBar("Login successfull!", context);
+      }
+    } catch (e) {
+      showSnackBar(e.toString(), context);
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  void loginWithGoogle() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      // get feedback from the authmethods' signup function
+      String retMessage = await AuthMethods().GoogleSignin();
+
+      if (retMessage != "success") {
+        showSnackBar(retMessage, context);
+      } else {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => BottomNavigation()),
+        );
+        showSnackBar("New Account Created Succesfully!", context);
+      }
+    } catch (e) {
+      showSnackBar(e.toString(), context);
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
   // Method to pass the data fields to the authmethods and create a new account
   void signUpUser() async {
     setState(() {
@@ -61,13 +114,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (retMessage != "success") {
         showSnackBar(retMessage, context);
       } else {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => LoginScreen()),
-        );
+        // Navigator.of(context).pushReplacement(
+        //   MaterialPageRoute(builder: (context) => LoginScreen()),
+        // );
         showSnackBar("New Account Created Succesfully!", context);
       }
     } catch (e) {
       showSnackBar(e.toString(), context);
+    }
+
+    try {
+      String ret = await AuthMethods().login(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim());
+
+      if (ret != "success") {
+        showSnackBar(ret, context);
+      } else {
+        showSnackBar("Login Succesful!", context);
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => BottomNavigation()),
+        );
+
+        print("Login Succesfull!");
+      }
+    } catch (err) {
+      showSnackBar(err.toString(), context);
     }
 
     setState(() {
@@ -290,21 +362,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 // google + facebook + GitHub sign in buttons
                 const SizedBox(height: 32),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // google button
-                    SquareTile(imagePath: 'assets/images/google.png'),
+                    GestureDetector(
+                      onTap: loginWithGoogle,
+                      child: const SquareTile(
+                          imagePath: 'assets/images/google.png'),
+                    ),
 
-                    SizedBox(width: 25),
+                    const SizedBox(width: 25),
 
                     // facebook button
-                    SquareTile(imagePath: 'assets/images/facebook.png'),
+                    GestureDetector(
+                        onTap: loginWithFacebook,
+                        child: SquareTile(
+                            imagePath: 'assets/images/facebook.png')),
 
-                    SizedBox(width: 25),
+                    const SizedBox(width: 25),
 
                     // GitHub button
-                    SquareTile(imagePath: 'assets/images/github_2.png'),
+                    // SquareTile(imagePath: 'assets/images/github_2.png'),
                   ],
                 ),
 

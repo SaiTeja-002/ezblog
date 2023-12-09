@@ -256,7 +256,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(width: 25),
 
                     // GitHub button
-                    SquareTile(imagePath: 'assets/images/github_2.png'),
+                    // SquareTile(imagePath: 'assets/images/github_2.png'),
                   ],
                 ),
 
