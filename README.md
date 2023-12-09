@@ -8,6 +8,12 @@ EzBlog is a user-friendly android blogging application where users can easily cr
 
 The project addresses secure authorization using OAuth, allowing users to grant limited access to their resources without exposing sensitive credentials. The OAuth implementation involves client registration, authorization requests, user authorization, token requests, and access token usage.
 
+## OAuth 
+- User Experience: Users log in using their preferred method - email, Google, or Facebook accounts.
+- Flutter Code: The Flutter code integrates plugins and packages to initiate the OAuth flow and handle the user’s choice.
+- Firebase Integration: Firebase Authentication services handle OAuth flows in the back-ground, validating tokens and providing user information securely.
+- App-Level Access: Once authenticated, the app retrieves user data from Firebase Authentication, allowing specific features based on the user profiles
+
 ## Project Analysis
 Functionalities of various screen in the app
 
@@ -46,10 +52,7 @@ Follow the below mentioned steps to set up EzBlog in your local machine
 
 ### Prerequisites
 
-Make sure that the following softwares are installed in your machine
-
-- [Flutter SDK](https://flutter.dev/docs/get-started/install)
-- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+Make sure you have Flutter SDK and Git installed in your machine
 
 ### Git Clone
 
