@@ -94,10 +94,7 @@ class _BlogDetailPageState extends State<BlogDetailPage> {
                       children: [
                         CircleAvatar(
                           radius: 20,
-                          backgroundImage: NetworkImage(
-                            // "https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg"
-                            widget.snap["profimg"],
-                          ),
+                          backgroundImage: NetworkImage(widget.snap["profimg"]),
                         ),
 
                         // r1 - username
@@ -178,24 +175,10 @@ class _BlogDetailPageState extends State<BlogDetailPage> {
                                             try {
                                               await widget.snap.reference
                                                   .delete();
-                                              // ScaffoldMessenger.of(context)
-                                              //     .showSnackBar(
-                                              //   const SnackBar(
-                                              //     content:
-                                              //         Text('Blog post deleted'),
-                                              //   ),
-                                              // );
                                               showSnackBar(
                                                   "blog has been deleted Succesfully!",
                                                   context);
                                             } catch (error) {
-                                              // ScaffoldMessenger.of(context)
-                                              //     .showSnackBar(
-                                              //   SnackBar(
-                                              //     content: Text(
-                                              //         'Error deleting blog post: $error'),
-                                              //   ),
-                                              // );
                                               showSnackBar(
                                                   error.toString(), context);
                                             }
@@ -227,10 +210,7 @@ class _BlogDetailPageState extends State<BlogDetailPage> {
                       width: MediaQuery.of(context).size.width * 0.95,
                       child: ClipRRect(
                         // borderRadius: BorderRadius.circular(15),
-                        child: Image.network(
-                            // "https://plus.unsplash.com/premium_photo-1681412205172-8c06ca667689?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",
-                            // "https://images.unsplash.com/photo-1690484813045-d27df776bc8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",
-                            widget.snap["posturl"],
+                        child: Image.network(widget.snap["posturl"],
                             fit: BoxFit.cover),
                       ),
                     ),
@@ -320,123 +300,3 @@ class _BlogDetailPageState extends State<BlogDetailPage> {
     );
   }
 }
-
-
-// import 'package:flutter/material.dart';
-
-// class DetailedBlogCard extends StatefulWidget {
-//   const DetailedBlogCard({super.key});
-
-//   @override
-//   State<DetailedBlogCard> createState() => _DetailedBlogCardState();
-// }
-
-// class _DetailedBlogCardState extends State<DetailedBlogCard> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Blog Detail'),
-//       ),
-//       body: Center(
-//           child: Column(
-//         children: [
-//           Container(
-//             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4)
-//                 .copyWith(right: 0),
-//             child: Row(
-//               children: [
-//                 const CircleAvatar(
-//                   radius: 16,
-//                   backgroundImage: NetworkImage(
-//                       "https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg"),
-//                 ),
-
-//                 // r1 - username
-//                 const Expanded(
-//                   child: Padding(
-//                     padding: EdgeInsets.only(left: 8),
-//                     child: Column(
-//                       mainAxisSize: MainAxisSize.min,
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         Text(
-//                           "UserName",
-//                           style: TextStyle(
-//                               fontWeight: FontWeight.bold,
-//                               fontSize: 15,
-//                               color: Colors.black),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ),
-
-//                 // r1 - Expanded VertButton
-//                 IconButton(
-//                   onPressed: () {
-//                     showDialog(
-//                       context: context,
-//                       builder: (context) => Dialog(
-//                         child: ListView(
-//                           padding: const EdgeInsets.symmetric(
-//                             vertical: 16,
-//                           ),
-//                           shrinkWrap: true,
-//                           children: ["Edit", "Delete"]
-//                               .map(
-//                                 (e) => InkWell(
-//                                   onTap: () {},
-//                                   child: Container(
-//                                     padding: const EdgeInsets.symmetric(
-//                                         vertical: 12, horizontal: 16),
-//                                     child: Text(e),
-//                                   ),
-//                                 ),
-//                               )
-//                               .toList(),
-//                         ),
-//                       ),
-//                     );
-//                   },
-//                   icon: const Icon(Icons.more_vert_rounded),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       )),
-//     );
-//   }
-// }
-
-
-// import 'package:flutter/material.dart';
-
-// class BlogDetailPage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Blog Detail'),
-//       ),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             // Display the details of the clicked blog post here
-//             Text(
-//               "Blog Title",
-//               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-//             ),
-//             Text(
-//               "Blog Description",
-//               style: TextStyle(fontSize: 16),
-//             ),
-//             // Add more details as needed
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

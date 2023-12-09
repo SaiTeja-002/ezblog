@@ -1,5 +1,3 @@
-// CHAT-GPT CODE FOR STREAM BUILDER
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ezblog/pages/blog_card.dart';
 import 'package:ezblog/pages/login_page.dart';

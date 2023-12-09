@@ -29,13 +29,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
         index: _currentIndex,
         children: _pages,
       ),
-
       bottomNavigationBar: CurvedNavigationBar(
         height: 70,
         animationDuration: const Duration(milliseconds: 300),
         backgroundColor: Colors.grey.shade400,
-        // color: Colors.grey.shade200,
-        // buttonBackgroundColor: Colors.grey.shade200,
         onTap: (index) {
           setState(() {
             _currentIndex = index;
@@ -48,20 +45,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
           Icon(Icons.person_outline),
         ],
       ),
-
-      // bottomNavigationBar: BottomNavigationBar(
-      //   currentIndex: _currentIndex,
-      //   onTap: (index) {
-      //     setState(() {
-      //       _currentIndex = index;
-      //     });
-      //   },
-      //   items: const [
-      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-      //     BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Add'),
-      //     BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-      //   ],
-      // ),
     );
   }
 }

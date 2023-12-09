@@ -89,36 +89,7 @@ class _BlogCardState extends State<BlogCard> {
                         ),
                       ),
 
-                      // r1 - Expanded VertButton
-                      // IconButton(
-                      //   onPressed: () {
-                      //     showDialog(
-                      //       context: context,
-                      //       builder: (context) => Dialog(
-                      //         child: ListView(
-                      //           padding: const EdgeInsets.symmetric(
-                      //             vertical: 16,
-                      //           ),
-                      //           shrinkWrap: true,
-                      //           children: ["Edit", "Delete"]
-                      //               .map(
-                      //                 (e) => InkWell(
-                      //                   onTap: () {},
-                      //                   child: Container(
-                      //                     padding: const EdgeInsets.symmetric(
-                      //                         vertical: 12, horizontal: 16),
-                      //                     child: Text(e),
-                      //                   ),
-                      //                 ),
-                      //               )
-                      //               .toList(),
-                      //         ),
-                      //       ),
-                      //     );
-                      //   },
-                      //   icon: const Icon(Icons.more_vert_rounded),
-                      // ),
-
+                      // r1 - vert button
                       if (isCurrentUserAuthor)
                         IconButton(
                           onPressed: () {
@@ -173,24 +144,10 @@ class _BlogCardState extends State<BlogCard> {
                                           try {
                                             await widget.snap.reference
                                                 .delete();
-                                            // ScaffoldMessenger.of(context)
-                                            //     .showSnackBar(
-                                            //   const SnackBar(
-                                            //     content:
-                                            //         Text('Blog post deleted'),
-                                            //   ),
-                                            // );
                                             showSnackBar(
                                                 "blog has been deleted Succesfully!",
                                                 context);
                                           } catch (error) {
-                                            // ScaffoldMessenger.of(context)
-                                            //     .showSnackBar(
-                                            //   SnackBar(
-                                            //     content: Text(
-                                            //         'Error deleting blog post: $error'),
-                                            //   ),
-                                            // );
                                             showSnackBar(
                                                 error.toString(), context);
                                           }
@@ -222,10 +179,7 @@ class _BlogCardState extends State<BlogCard> {
                     width: MediaQuery.of(context).size.width * 0.9,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
-                      child: Image.network(
-                          // "https://plus.unsplash.com/premium_photo-1681412205172-8c06ca667689?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",
-                          // "https://images.unsplash.com/photo-1690484813045-d27df776bc8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",
-                          widget.snap["posturl"],
+                      child: Image.network(widget.snap["posturl"],
                           fit: BoxFit.cover),
                     ),
                   ),
@@ -237,7 +191,6 @@ class _BlogCardState extends State<BlogCard> {
                       top: 8, bottom: 15, left: 16, right: 16),
                   child: Text(
                     widget.snap["title"],
-                    // "This is a huge title and let's see how it behaves in multiple lines",
                     style: const TextStyle(
                         fontSize: 25, fontWeight: FontWeight.bold),
                     maxLines: 1,
@@ -251,9 +204,7 @@ class _BlogCardState extends State<BlogCard> {
                       top: 8, bottom: 15, left: 15, right: 15),
                   child: Text(
                     widget.snap["content"],
-                    // "This is the description. It can be a longer text that is to be truncated if it's too long. This is the description. It can be a longer text that needs to be truncated if it's too long.",
                     maxLines: 2,
-                    // Display ellipsis (...) if text overflows
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(fontSize: 15),
                   ),

@@ -16,7 +16,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
-  // final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool _isLoading = false;
 
@@ -139,14 +138,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     hintText: "Email",
                     keyboardType: TextInputType.emailAddress),
 
-                // Username Input
-                // const SizedBox(height: 20),
-                // MyTextField(
-                //   textController: userNameController,
-                //   hintText: "Username",
-                //   keyboardType: TextInputType.name,
-                // ),
-
                 // Password Input
                 const SizedBox(height: 20),
                 MyTextField(
@@ -154,25 +145,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     hintText: "Password",
                     obscure: true,
                     keyboardType: TextInputType.text),
-
-                // TODO: Change it to password type
-
-                // forgot password?
-                // Padding(
-                //   padding: const EdgeInsets.only(top: 10.0),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.end,
-                //     children: [
-                //       Text(
-                //         'Forgot Password?',
-                //         style: TextStyle(
-                //           color: Colors.grey[600],
-                //           fontSize: 12,
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
 
                 // Login Button
                 const SizedBox(height: 30),
@@ -254,13 +226,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             imagePath: 'assets/images/facebook.png')),
 
                     SizedBox(width: 25),
-
-                    // GitHub button
-                    // SquareTile(imagePath: 'assets/images/github_2.png'),
                   ],
                 ),
-
-                // Flexible(child: Container(), flex: 2),
 
                 // Sign Up Text
                 const SizedBox(height: 32),

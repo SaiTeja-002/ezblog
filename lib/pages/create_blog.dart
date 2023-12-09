@@ -23,8 +23,6 @@ class CreateBlog extends StatefulWidget {
 }
 
 class _CreateBlogState extends State<CreateBlog> {
-  // final User? current_user = FirebaseAuth.instance.currentUser;
-  // final Future<UserModel.User> currentUser = AuthMethods().getUserDetails();
   late UserModel.User currentUser;
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
@@ -99,19 +97,8 @@ class _CreateBlogState extends State<CreateBlog> {
       Uint8List img = await pickImage(ImageSource.gallery);
 
       setState(() {
-        // image = imagePath as Uint8List?;
         image = img;
       });
-
-      // XFile? result =
-      //     await ImagePicker().pickImage(source: ImageSource.gallery);
-
-      // if (result == null) {
-      //   return;
-      // }
-
-      // final imagePath = File(result.path);
-      // final img = await result.readAsBytes();
     } on PlatformException catch (e) {
       // SnackBar(content: )
       print("Error - $e");
@@ -123,22 +110,8 @@ class _CreateBlogState extends State<CreateBlog> {
       Uint8List img = await pickImage(ImageSource.camera);
 
       setState(() {
-        // image = imagePath as Uint8List?;
         image = img;
       });
-
-      // XFile? result = await ImagePicker().pickImage(source: ImageSource.camera);
-
-      // if (result == null) {
-      //   return;
-      // }
-
-      // // final imagePath = File(result.path);
-      // final img = await result.readAsBytes();
-
-      // setState(() {
-      //   image = img;
-      // });
     } on PlatformException catch (e) {
       print("Error - $e");
     }
@@ -230,16 +203,6 @@ class _CreateBlogState extends State<CreateBlog> {
             children: [
               // Display the selected image
               image != null
-                  // ? Image.file(image!)
-                  // ? Text(image!.toString())
-                  // ? Container(
-                  //     decoration: BoxDecoration(
-                  //       image: DecorationImage(
-                  //         image: MemoryImage(image!),
-                  //         fit: BoxFit.cover,
-                  //       ),
-                  //     ),
-                  //   )
                   ? SizedBox(
                       width: screenWidth * 0.5,
                       height: screenHeight * 0.1,
@@ -320,31 +283,6 @@ class _CreateBlogState extends State<CreateBlog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  // Pick image button
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     pickImage();
-                  //   },
-                  //   child: Container(
-                  //     decoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(8),
-                  //       color: Colors.green,
-                  //     ),
-                  //     // color: Colors.green,
-                  //     child: const Padding(
-                  //       padding: EdgeInsets.symmetric(
-                  //           vertical: 10.0, horizontal: 15),
-                  //       child: Text(
-                  //         "Gallery",
-                  //         style: TextStyle(
-                  //             color: Colors.white,
-                  //             fontSize: 17,
-                  //             fontWeight: FontWeight.w500),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-
                   // Gallery Button
                   MaterialButton(
                     onPressed: () {
