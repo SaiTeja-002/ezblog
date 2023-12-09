@@ -5,7 +5,11 @@ import 'package:flutter/material.dart';
 import 'dart:typed_data';
 // import 'package:flutter_gram/models/user_model.dart' as UserModel;
 import 'package:ezblog/models/user_model.dart' as UserModel;
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -19,7 +23,7 @@ class AuthMethods {
         await _firestore.collection('users').doc(currentUser.uid).get();
 
     return UserModel.User.fromSnap(snap);
-  }
+  } //Get User Details
 
   // Create a new user
   Future<String> SingUp({
@@ -139,5 +143,65 @@ class AuthMethods {
     } // Google signin
 
     return ret;
+  }
+
+  Future<String> FacebookSignin() async {
+    String ret = "Error at the beginning itself!";
+
+    try {
+      print("called facebook auth");
+      await FacebookAuth.instance.logOut();
+      final LoginResult result = await FacebookAuth.instance.login();
+
+      if (result.status == LoginStatus.success) {
+        final AccessToken accessToken = result.accessToken!;
+
+        final graphResponse = await http.get(
+          Uri.parse('https://graph.facebook.com/v14.0/me?fields=id,name,email'),
+          headers: {'Authorization': 'Bearer ${accessToken.token}'},
+        );
+
+        final Map<String, dynamic> userData = json.decode(graphResponse.body);
+
+        String facebookName = userData['name'] ?? '';
+        String facebookEmail = userData['email'] ?? '';
+
+        final AuthCredential creds =
+            FacebookAuthProvider.credential(result.accessToken!.token);
+
+        UserCredential auth = await _auth.signInWithCredential(creds);
+
+        DocumentSnapshot userDoc =
+            await _firestore.collection("users").doc(auth.user?.uid).get();
+
+        if (userDoc.exists) {
+          print('User Already Exist: Updating Only Facebook');
+          await _firestore.collection("users").doc(auth.user?.uid).update({
+            'facebook': facebookEmail,
+          });
+        } else {
+          await _firestore.collection("users").doc(auth.user?.uid).set({
+            "userName": facebookName,
+            'email': facebookEmail,
+            'type': "facebook",
+            'uid': auth.user?.uid,
+            'photourl': "https://i.stack.imgur.com/l60Hf.png"
+          });
+        }
+
+        ret = "success";
+      } else if (result.status == LoginStatus.cancelled) {
+        print("Facebook login cancelled");
+        ret = "auth cancelled";
+      } else {
+        print("Facebook login failed: ${result.message}");
+        ret = result.message.toString();
+      }
+
+      return ret;
+    } catch (e) {
+      print("Facebook login error: $e");
+      return e.toString();
+    }
   }
 }

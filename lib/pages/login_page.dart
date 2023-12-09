@@ -45,6 +45,32 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
+  void loginWithFacebook() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      // get feedback from the authmethods' signup function
+      String retMessage = await AuthMethods().FacebookSignin();
+
+      if (retMessage != "success") {
+        showSnackBar(retMessage, context);
+      } else {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => BottomNavigation()),
+        );
+        showSnackBar("Login successfull!", context);
+      }
+    } catch (e) {
+      showSnackBar(e.toString(), context);
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
   void loginWithGoogle() async {
     setState(() {
       _isLoading = true;
@@ -222,7 +248,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(width: 25),
 
                     // facebook button
-                    SquareTile(imagePath: 'assets/images/facebook.png'),
+                    GestureDetector(
+                        onTap: loginWithFacebook,
+                        child: SquareTile(
+                            imagePath: 'assets/images/facebook.png')),
 
                     SizedBox(width: 25),
 

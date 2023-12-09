@@ -1,0 +1,8 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<resources>
+    <string name="facebook_app_id">259476593477362</string>
+    <string name="fb_login_protocol_scheme">fb259476593477362</string>
+    <string name="facebook_client_token">2abcfdd4979f9d50b31dcb37a93028c5</string>
+    <string name="app_name">"ezblog_app"</string>
+
+</resources>

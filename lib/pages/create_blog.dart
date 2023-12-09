@@ -80,6 +80,7 @@ class _CreateBlogState extends State<CreateBlog> {
 
   Future<void> getInitialData() async {
     UserModel.User user = await AuthMethods().getUserDetails();
+    print(user);
 
     setState(() {
       currentUser = user;
